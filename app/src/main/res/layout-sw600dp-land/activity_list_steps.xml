@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container_for_step_list"
+    style="@style/BaseRelativeLayoutStyle"
+    android:orientation="horizontal"
+    android:background="@color/colorBackground"
+    tools:context="com.example.kalas.backingapp.activities.StepsListActivity">
+
+    <fragment
+        android:id="@+id/recipe_list_ingredients"
+        class="com.example.kalas.backingapp.fragments.StepsListFragment"
+        android:layout_width="@dimen/left_pane_width"
+        android:layout_height="wrap_content">
+    </fragment>
+
+    <FrameLayout
+        android:id="@+id/landscape_detils_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </FrameLayout>
+</LinearLayout>

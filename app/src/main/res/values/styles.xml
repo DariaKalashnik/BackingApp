@@ -1,0 +1,219 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <!-- Base Style for RelativeLayout -->
+    <style name="BaseRelativeLayoutStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <!-- Base Style for LinearLayout -->
+    <style name="BaseLinearLayoutStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+
+    <!-- Styles for list_recipes.xml -->
+
+    <!-- Style for the CardView -->
+    <style name="CardViewStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">@dimen/value_8dp</item>
+    </style>
+
+    <!-- Style for the RelativeLayout -->
+    <style name="BaseRelativeLayoutStyle.RecipesContainer">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">@dimen/value_16dp</item>
+    </style>
+
+    <!-- Style for the recipe's name -->
+    <style name="RecipeTitleStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">@dimen/value_16dp</item>
+        <item name="android:layout_marginStart" tools:targetApi="jelly_bean_mr1">16dp</item>
+        <item name="android:layout_marginTop">@dimen/value_16dp</item>
+        <item name="android:layout_toEndOf" tools:targetApi="jelly_bean_mr1">@id/img_recipe_book
+        </item>
+        <item name="android:layout_toRightOf">@id/img_recipe_book</item>
+        <item name="android:textColor">@color/colorSecondaryText</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- Style for the recipe's name -->
+    <style name="RecipeTitleStyle.Servings">
+        <item name="android:layout_below">@id/recipe_name</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:layout_marginTop">0dp</item>
+    </style>
+
+    <!-- Style for the default recipe's image -->
+    <style name="RecipeImgStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:src">@drawable/recipe_book</item>
+    </style>
+
+
+    <!-- Styles for list_steps.xml -->
+
+    <!-- Style for the CardView -->
+    <style name="CardViewStyle.Step">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">@dimen/value_2dp</item>
+    </style>
+
+    <!-- Style for the shortDescription of the recipe's step -->
+    <style name="RecipeShortDescriptionStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_marginStart" tools:targetApi="jelly_bean_mr1">@dimen/value_16dp</item>
+        <item name="android:layout_marginLeft">@dimen/value_16dp</item>
+        <item name="android:textColor">@color/colorSecondaryText</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- Style for the icon in the steps list -->
+    <style name="IconStepsListStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentEnd" tools:targetApi="jelly_bean_mr1">true</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_marginEnd" tools:targetApi="jelly_bean_mr1">@dimen/value_16dp</item>
+        <item name="android:layout_marginRight">@dimen/value_16dp</item>
+        <item name="android:src">@drawable/ic_search_black_24dp</item>
+        <item name="android:tint">@color/colorSecondaryText</item>
+    </style>
+
+
+    <!-- Styles for expandable_layout_design.xml -->
+
+    <!-- Style for the RelativeLayout -->
+    <style name="ClickableRelativeLayoutStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/value_70dp</item>
+        <item name="android:background">@color/colorPrimaryLight</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <!-- Style for the Up Arrow in the ExpandableLayout -->
+    <style name="ArrowImgStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_margin">@dimen/value_16dp</item>
+        <item name="android:clickable">false</item>
+        <item name="android:src">@drawable/ic_expand_more_white_24dp</item>
+        <item name="android:tint">@color/colorPrimaryDark</item>
+    </style>
+
+    <!-- Style for the Down Arrow in the ExpandableLayout -->
+    <style name="ArrowImgStyle.Down">
+        <item name="android:src">@drawable/ic_expand_less_white_24dp</item>
+        <item name="android:visibility">gone</item>
+    </style>
+
+    <!-- Style for the Title of the ExpandableLayout -->
+    <style name="ExpandableTitleStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:clickable">false</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:text">@string/expandable_layout_title</item>
+        <item name="android:textSize">@dimen/value_16sp</item>
+    </style>
+
+
+    <!-- Styles for fragment_details.xml -->
+
+    <!-- Style the RelativeLayout -->
+    <style name="BaseRelativeLayoutStyle.MediaContainer">
+        <item name="android:layout_height">@dimen/value_250dp</item>
+    </style>
+
+    <!-- Style the Step description Video -->
+    <style name="VideoStepDescriptionStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_margin">@dimen/value_16dp</item>
+    </style>
+
+    <!-- Style the Step description ImageView -->
+    <style name="VideoStepDescriptionStyle.ImageDescription">
+        <item name="android:scaleType">center</item>
+        <item name="android:visibility">gone</item>
+    </style>
+
+    <!-- Style the Step description TextView -->
+    <style name="TextStepDescriptionStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_below">@id/media_container</item>
+        <item name="android:layout_marginEnd" tools:targetApi="jelly_bean_mr1">@dimen/value_16dp</item>
+        <item name="android:layout_marginLeft">@dimen/value_16dp</item>
+        <item name="android:layout_marginStart" tools:targetApi="jelly_bean_mr1">@dimen/value_16dp</item>
+        <item name="android:layout_marginRight">@dimen/value_16dp</item>
+    </style>
+
+    <!-- Style the Step description Video in landscape orientation-->
+    <style name="VideoStepDescriptionStyle.Land">
+        <item name="android:layout_height">@dimen/value_400dp</item>
+        <item name="android:layout_margin">@dimen/value_5dp</item>
+    </style>
+
+    <!-- Style the Step description ImageView in landscape orientation -->
+    <style name="VideoStepDescriptionStyle.ImageDescription.Land">
+        <item name="android:layout_height">@dimen/value_400dp</item>
+        <item name="android:layout_margin">@dimen/value_5dp</item>
+    </style>
+
+
+    <!-- Styles for fragment_list_steps.xml -->
+
+    <!-- Styles for the RelativeLayout -->
+    <style name="BaseRelativeLayoutStyle.StepsContainer">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/colorBackground</item>
+    </style>
+
+    <!-- Styles for the ExpandableLayout -->
+    <style name="ExpandLayoutStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_below">@id/expand_layout</item>
+        <item name="android:background">@android:color/white</item>
+    </style>
+
+    <!-- Styles for the recipes' Ingredients -->
+    <style name="IngredientsTextStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/value_5dp</item>
+        <item name="android:ellipsize">none</item>
+        <item name="android:maxLines">15</item>
+        <item name="android:paddingStart" tools:targetApi="jelly_bean_mr1">@dimen/value_16dp</item>
+        <item name="android:paddingRight">@dimen/value_16dp</item>
+        <item name="android:paddingEnd" tools:targetApi="jelly_bean_mr1">@dimen/value_16dp</item>
+        <item name="android:paddingLeft">@dimen/value_16dp</item>
+    </style>
+</resources>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:id="@+id/clickable_layout"
+        style="@style/ClickableRelativeLayoutStyle">
+
+        <ImageView
+            android:id="@+id/arrow_down"
+            style="@style/ArrowImgStyle"
+            android:contentDescription="@string/img_expand_more" />
+
+        <ImageView
+            android:id="@+id/arrow_up"
+            style="@style/ArrowImgStyle.Down"
+            android:contentDescription="@string/img_expand_less" />
+
+        <TextView
+            android:id="@+id/title_for_expandable"
+            style="@style/ExpandableTitleStyle" />
+    </RelativeLayout>
+</layout>

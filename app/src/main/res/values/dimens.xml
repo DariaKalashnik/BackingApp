@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- dp values -->
+    <dimen name="value_0dp">0dp</dimen>
+    <dimen name="value_1dp">1dp</dimen>
+    <dimen name="value_2dp">2dp</dimen>
+    <dimen name="value_3dp">3dp</dimen>
+    <dimen name="value_5dp">5dp</dimen>
+    <dimen name="value_4dp">4dp</dimen>
+    <dimen name="value_8dp">8dp</dimen>
+    <dimen name="value_10dp">10dp</dimen>
+    <dimen name="value_14dp">14dp</dimen>
+    <dimen name="value_15dp">15dp</dimen>
+    <dimen name="value_16dp">16dp</dimen>
+    <dimen name="value_18dp">18dp</dimen>
+    <dimen name="value_20dp">20dp</dimen>
+    <dimen name="value_30dp">30dp</dimen>
+    <dimen name="value_50dp">50dp</dimen>
+    <dimen name="value_70dp">70dp</dimen>
+    <dimen name="value_100dp">100dp</dimen>
+    <dimen name="value_150dp">150dp</dimen>
+    <dimen name="value_185dp">185dp</dimen>
+    <dimen name="value_200dp">200dp</dimen>
+    <dimen name="value_250dp">250dp</dimen>
+    <dimen name="value_400dp">400dp</dimen>
+    <dimen name="left_pane_width">450dp</dimen>
+    <!-- sp values -->
+    <dimen name="value_16sp">16sp</dimen>
+    <dimen name="value_18sp">18sp</dimen>
+    <dimen name="value_20sp">20sp</dimen>
+    <dimen name="value_25sp">25sp</dimen>
+    <dimen name="text_margin">16dp</dimen>
+
+    <!--
+Refer to App Widget Documentation for margin information
+http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
+    -->
+    <dimen name="widget_margin">8dp</dimen>
+</resources>

@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Recipe Book</string>
+
+    <!-- Content descriptions -->
+    <string name="recipe_img_desc">image that represent recipe bool in the list of recipes</string>
+    <string name="img_expand_more">arrow that expands expandable layout</string>
+    <string name="img_expand_less">arrow that collapses expandable layout</string>
+    <string name="img_step_description">image that shows step description</string>
+
+    <!-- Tools text -->
+    <string name="tools_dish_name">Nutella Pie</string>
+    <string name="tools_recipe_servings">Servings: 8</string>
+    <string name="tools_recipe_step_shortDescription">Recipe Introduction</string>
+    <string name="tools_recipe_step_description">1. Preheat the oven to 350\u00b0F. Butter a 9\" deep dish pie pan.</string>
+    <string name="tools_recipe_ingredient">Graham Cracker crumbs - 2 cup</string>
+
+    <!-- String values -->
+    <string name="text_recipe_servings">Servings: %s</string>
+    <string name="expandable_layout_title">Ingredients details</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+</resources>

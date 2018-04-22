@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="stepModel"
+            type="com.example.kalas.backingapp.model.Step" />
+    </data>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_view"
+        style="@style/CardViewStyle.Step"
+        app:cardBackgroundColor="@color/colorPrimaryLight"
+        card_view:cardCornerRadius="@dimen/value_4dp"
+        card_view:cardElevation="@dimen/value_2dp">
+
+        <RelativeLayout style="@style/BaseRelativeLayoutStyle.RecipesContainer">
+
+            <TextView
+                android:id="@+id/recipe_short_desc"
+                style="@style/RecipeShortDescriptionStyle"
+                android:text="@{stepModel.shortDescription}"
+                tool:text="@string/tools_recipe_step_shortDescription" />
+
+            <ImageView
+                android:id="@+id/img_view_details"
+                style="@style/IconStepsListStyle"
+                android:contentDescription="@string/recipe_img_desc" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+</layout>
