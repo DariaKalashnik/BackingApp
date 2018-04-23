@@ -17,7 +17,7 @@ import static com.example.kalas.backingapp.utils.BuildConfig.SELECTED_STEP_KEY;
 
 public class StepsListActivity extends AppCompatActivity implements StepsListFragment.OnFragmentInteractionListener {
 
-    private boolean mTabLayout = false;
+    public static boolean sTabLayout = false;
     public static ArrayList<Recipe> sRecipeList;
 
     @Override
@@ -34,11 +34,11 @@ public class StepsListActivity extends AppCompatActivity implements StepsListFra
         }
 
         if (findViewById(R.id.details_fragment) != null) {
-            mTabLayout = true;
+            sTabLayout = true;
         }
 
         if (savedInstanceState == null) {
-            if (mTabLayout) {
+            if (sTabLayout) {
                 DetailsFragment stepDetailsFragment = new DetailsFragment();
                 if (bundle != null) {
                     bundle.putInt(SELECTED_STEP_KEY, 0); // 0 index indicates first element in the list
@@ -56,20 +56,20 @@ public class StepsListActivity extends AppCompatActivity implements StepsListFra
 
     @Override
     public void onFragmentInteraction(int selectedStepId) {
-//        if (mTabLayout) {
+        if (sTabLayout) {
         DetailsFragment stepDetailsFragment = DetailsFragment.newInstance(sRecipeList, selectedStepId);
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.details_fragment, stepDetailsFragment)
                 .commit();
 
-//        } else {
-//            Intent intent = new Intent();
-//            intent.setClass(this, DetailsActivity.class);
-//            intent.putExtra(COUNT_STEPS_KEY, countSteps);
-//            intent.putExtra(SELECTED_STEP_KEY, selectedStepId);
-//            startActivity(intent);
-//        }
+        } else {
+            Intent intent = new Intent();
+            intent.setClass(this, DetailsActivity.class);
+            intent.putParcelableArrayListExtra(RECIPES_KEY, sRecipeList);
+            intent.putExtra(SELECTED_STEP_KEY, selectedStepId);
+            startActivity(intent);
+        }
     }
 
     @Override

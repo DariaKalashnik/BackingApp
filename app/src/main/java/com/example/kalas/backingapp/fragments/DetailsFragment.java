@@ -39,10 +39,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-import butterknife.BindDrawable;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
-
+import static com.example.kalas.backingapp.activities.StepsListActivity.sTabLayout;
 import static com.example.kalas.backingapp.utils.BuildConfig.RECIPES_KEY;
 import static com.example.kalas.backingapp.utils.BuildConfig.SELECTED_STEP_KEY;
 
@@ -58,12 +55,7 @@ public class DetailsFragment extends Fragment implements Player.EventListener {
     private MediaSessionCompat mMediaSession;
     private PlaybackStateCompat.Builder mStateBuilder;
     private Step mStep;
-    private Unbinder mUnbinder;
     private long mPlayerPosition = 0;
-
-    @BindDrawable(R.drawable.recipe_book)
-    Drawable mNoMediaDescription;
-
 
     public DetailsFragment() {
         // Empty public constructor
@@ -85,16 +77,18 @@ public class DetailsFragment extends Fragment implements Player.EventListener {
             mRecipes = getArguments().getParcelableArrayList(RECIPES_KEY);
             mSelectedStepId = getArguments().getInt(SELECTED_STEP_KEY);
         }
-//            else
-//            mRecipes = getActivity().getIntent().getParcelableArrayListExtra(RECIPES_KEY);
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for the fragment
+        if (!sTabLayout) {
+            mRecipes = getActivity().getIntent().getParcelableArrayListExtra(RECIPES_KEY);
+            mSelectedStepId = getActivity().getIntent().getIntExtra(SELECTED_STEP_KEY, 0);
+        }
+
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_details, container, false);
         View view = mBinding.getRoot();
-        mUnbinder = ButterKnife.bind(this, view);
 
         mRecipe = Utils.setRecipe(mRecipes);
 
@@ -140,21 +134,26 @@ public class DetailsFragment extends Fragment implements Player.EventListener {
     }
 
     private void displayMediaDescription() {
-        boolean hasVideo = true;
-        if (!(mStep.getVideoURL() == null || mStep.getVideoURL().equals(""))) {
-            hasVideo = false;
+        Drawable noMediaDescription = getResources().getDrawable(R.drawable.question);
+        boolean hasVideo = false;
+        if (!(mStep.getVideoURL().equals(""))) {
+            hasVideo = true;
             initializeMediaSession();
             initializePlayer();
         }
 
-        if (!(hasVideo && mStep.getThumbnailURL() == null)){
-            mBinding.exoplayer.setVisibility(View.GONE);
+        if (!hasVideo && !mStep.getThumbnailURL().equals("")) {
             mBinding.imgStepDescription.setVisibility(View.VISIBLE);
+            mBinding.exoplayer.setVisibility(View.GONE);
             Picasso.with(this.getContext())
                     .load(mStep.getThumbnailURL())
+                    .error(noMediaDescription)
                     .into(mBinding.imgStepDescription);
-        } else {
-            mBinding.imgStepDescription.setImageDrawable(mNoMediaDescription);
+
+        } else if (!hasVideo && mStep.getThumbnailURL().equals("")) {
+            mBinding.imgStepDescription.setVisibility(View.VISIBLE);
+            mBinding.exoplayer.setVisibility(View.GONE);
+            mBinding.imgStepDescription.setImageDrawable(noMediaDescription);
         }
     }
 
@@ -209,7 +208,6 @@ public class DetailsFragment extends Fragment implements Player.EventListener {
     @Override
     public void onPause() {
         super.onPause();
-        mUnbinder.unbind();
         if (Util.SDK_INT <= 23) {
             releasePlayer();
         }
