@@ -1,10 +1,10 @@
 package com.example.kalas.backingapp.fragments;
 
-import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.media.session.MediaSessionCompat;
 import android.support.v4.media.session.PlaybackStateCompat;
@@ -16,6 +16,7 @@ import com.example.kalas.backingapp.R;
 import com.example.kalas.backingapp.databinding.FragmentDetailsBinding;
 import com.example.kalas.backingapp.model.Recipe;
 import com.example.kalas.backingapp.model.Step;
+import com.example.kalas.backingapp.utils.Utils;
 import com.google.android.exoplayer2.ExoPlaybackException;
 import com.google.android.exoplayer2.ExoPlayerFactory;
 import com.google.android.exoplayer2.PlaybackParameters;
@@ -42,14 +43,13 @@ import butterknife.BindDrawable;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-import static com.example.kalas.backingapp.utils.BuildConfig.RECIPE_KEY;
+import static com.example.kalas.backingapp.utils.BuildConfig.RECIPES_KEY;
 import static com.example.kalas.backingapp.utils.BuildConfig.SELECTED_STEP_KEY;
 
 public class DetailsFragment extends Fragment implements Player.EventListener {
 
 
     private static final String TAG = DetailsFragment.class.getSimpleName();
-    private Context mContext;
     private FragmentDetailsBinding mBinding;
     private ArrayList<Recipe> mRecipes;
     private Recipe mRecipe;
@@ -61,80 +61,70 @@ public class DetailsFragment extends Fragment implements Player.EventListener {
     private Unbinder mUnbinder;
     private long mPlayerPosition = 0;
 
-
     @BindDrawable(R.drawable.recipe_book)
     Drawable mNoMediaDescription;
 
-    public DetailsFragment() {
-        // Required empty public constructor
-    }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        mContext = context;
+    public DetailsFragment() {
+        // Empty public constructor
     }
 
     public static DetailsFragment newInstance(ArrayList<Recipe> recipes, int selectedStepId) {
-        DetailsFragment fragment = new DetailsFragment();
+        DetailsFragment detailsFragment = new DetailsFragment();
         Bundle args = new Bundle();
-        args.putParcelableArrayList(RECIPE_KEY, recipes);
+        args.putParcelableArrayList(RECIPES_KEY, recipes);
         args.putInt(SELECTED_STEP_KEY, selectedStepId);
-        fragment.setArguments(args);
-        return fragment;
+        detailsFragment.setArguments(args);
+        return detailsFragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mRecipes = getArguments().getParcelableArrayList(RECIPE_KEY);
+            mRecipes = getArguments().getParcelableArrayList(RECIPES_KEY);
             mSelectedStepId = getArguments().getInt(SELECTED_STEP_KEY);
         }
 //            else
-//            mRecipes = getActivity().getIntent().getParcelableArrayListExtra(RECIPE_KEY);
+//            mRecipes = getActivity().getIntent().getParcelableArrayListExtra(RECIPES_KEY);
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // Inflate the layout for the fragment
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_details, container, false);
         View view = mBinding.getRoot();
         mUnbinder = ButterKnife.bind(this, view);
-        for (int i = 0; i < mRecipes.size(); i++) {
-            mRecipe = mRecipes.get(i);
 
-        }
+        mRecipe = Utils.setRecipe(mRecipes);
 
         displayStepDescription();
         displayMediaDescription();
 
         return view;
-
     }
 
     private void initializePlayer() {
         if (mExoPlayer == null) {
-                // Create an instance of the ExoPlayer
-                BandwidthMeter bandwidthMeter = new DefaultBandwidthMeter();
-                TrackSelector trackSelector = new DefaultTrackSelector(new AdaptiveTrackSelection.Factory(bandwidthMeter));
-                mExoPlayer = ExoPlayerFactory.newSimpleInstance(mContext, trackSelector);
-                mBinding.exoplayer.setPlayer(mExoPlayer);
+            // Create an instance of the ExoPlayer
+            BandwidthMeter bandwidthMeter = new DefaultBandwidthMeter();
+            TrackSelector trackSelector = new DefaultTrackSelector(new AdaptiveTrackSelection.Factory(bandwidthMeter));
+            mExoPlayer = ExoPlayerFactory.newSimpleInstance(this.getContext(), trackSelector);
+            mBinding.exoplayer.setPlayer(mExoPlayer);
 
-                mExoPlayer.addListener(this);
+            mExoPlayer.addListener(this);
 
-                // Prepare the MediaSource
-                String userAgent = Util.getUserAgent(mContext, TAG);
-                DataSource.Factory dataSourceFactory = new DefaultDataSourceFactory(mContext, userAgent);
-                MediaSource mediaSource = new ExtractorMediaSource.Factory(dataSourceFactory).createMediaSource(Uri.parse(mStep.getVideoURL()));
-                mExoPlayer.prepare(mediaSource);
-                mExoPlayer.setPlayWhenReady(true);
-                mExoPlayer.seekTo(mPlayerPosition);
+            // Prepare the MediaSource
+            String userAgent = Util.getUserAgent(this.getContext(), TAG);
+            DataSource.Factory dataSourceFactory = new DefaultDataSourceFactory(this.getContext(), userAgent);
+            MediaSource mediaSource = new ExtractorMediaSource.Factory(dataSourceFactory).createMediaSource(Uri.parse(mStep.getVideoURL()));
+            mExoPlayer.prepare(mediaSource);
+            mExoPlayer.setPlayWhenReady(true);
+            mExoPlayer.seekTo(mPlayerPosition);
         }
     }
 
-// https://codelabs.developers.google.com/codelabs/exoplayer-intro/index.html?index=..%2F..%2Findex#2
+
     private void releasePlayer() {
         if (mExoPlayer != null) {
             mPlayerPosition = mExoPlayer.getCurrentPosition();
@@ -150,21 +140,53 @@ public class DetailsFragment extends Fragment implements Player.EventListener {
     }
 
     private void displayMediaDescription() {
+        boolean hasVideo = true;
         if (!(mStep.getVideoURL() == null || mStep.getVideoURL().equals(""))) {
+            hasVideo = false;
             initializeMediaSession();
             initializePlayer();
-
-        } else {
-            if (!(mStep.getThumbnailURL() == null)) {
-                mBinding.exoplayer.setVisibility(View.GONE);
-                mBinding.imgStepDescription.setVisibility(View.VISIBLE);
-                Picasso.with(mContext)
-                        .load(mStep.getThumbnailURL())
-                        .into(mBinding.imgStepDescription);
-            } else {
-                mBinding.imgStepDescription.setImageDrawable(mNoMediaDescription);
-            }
         }
+
+        if (!(hasVideo && mStep.getThumbnailURL() == null)){
+            mBinding.exoplayer.setVisibility(View.GONE);
+            mBinding.imgStepDescription.setVisibility(View.VISIBLE);
+            Picasso.with(this.getContext())
+                    .load(mStep.getThumbnailURL())
+                    .into(mBinding.imgStepDescription);
+        } else {
+            mBinding.imgStepDescription.setImageDrawable(mNoMediaDescription);
+        }
+    }
+
+    private void initializeMediaSession() {
+
+        // Create a MediaSessionCompat
+        mMediaSession = new MediaSessionCompat(this.getContext(), TAG);
+
+        // Enable callbacks from MediaButtons and TransportControls
+        mMediaSession.setFlags(MediaSessionCompat.FLAG_HANDLES_MEDIA_BUTTONS |
+                MediaSessionCompat.FLAG_HANDLES_TRANSPORT_CONTROLS);
+
+        // Do not let MediaButtons restart the player when the app is not visible
+        mMediaSession.setMediaButtonReceiver(null);
+
+        // Set an initial PlaybackState with ACTION_PLAY, so media buttons can start the player
+        mStateBuilder = new PlaybackStateCompat.Builder()
+                .setActions(
+                        PlaybackStateCompat.ACTION_PLAY |
+                                PlaybackStateCompat.ACTION_PAUSE |
+                                PlaybackStateCompat.ACTION_SKIP_TO_PREVIOUS |
+                                PlaybackStateCompat.ACTION_PLAY_PAUSE);
+
+        mMediaSession.setPlaybackState(mStateBuilder.build());
+
+
+        // MySessionCallback has methods that handle callbacks from a media controller
+        mMediaSession.setCallback(new MySessionCallback());
+
+        // Start the Media Session since the activity is active
+        mMediaSession.setActive(true);
+
     }
 
     @Override
@@ -250,36 +272,6 @@ public class DetailsFragment extends Fragment implements Player.EventListener {
 
     }
 
-    private void initializeMediaSession() {
-
-        // Create a MediaSessionCompat.
-        mMediaSession = new MediaSessionCompat(mContext, TAG);
-
-        // Enable callbacks from MediaButtons and TransportControls.
-        mMediaSession.setFlags(MediaSessionCompat.FLAG_HANDLES_MEDIA_BUTTONS |
-                MediaSessionCompat.FLAG_HANDLES_TRANSPORT_CONTROLS);
-
-        // Do not let MediaButtons restart the player when the app is not visible.
-        mMediaSession.setMediaButtonReceiver(null);
-
-        // Set an initial PlaybackState with ACTION_PLAY, so media buttons can start the player.
-        mStateBuilder = new PlaybackStateCompat.Builder()
-                .setActions(
-                        PlaybackStateCompat.ACTION_PLAY |
-                                PlaybackStateCompat.ACTION_PAUSE |
-                                PlaybackStateCompat.ACTION_SKIP_TO_PREVIOUS |
-                                PlaybackStateCompat.ACTION_PLAY_PAUSE);
-
-        mMediaSession.setPlaybackState(mStateBuilder.build());
-
-
-        // MySessionCallback has methods that handle callbacks from a media controller.
-        mMediaSession.setCallback(new MySessionCallback());
-
-        // Start the Media Session since the activity is active.
-        mMediaSession.setActive(true);
-
-    }
 
     /**
      * Media Session Callbacks, where all external clients control the player.

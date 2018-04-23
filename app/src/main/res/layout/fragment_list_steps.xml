@@ -3,14 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="stepList"
             type="com.example.kalas.backingapp.fragments.StepsListFragment" />
-
-        <variable
-            name="ingredientModel"
-            type="com.example.kalas.backingapp.model.Ingredient" />
     </data>
 
     <RelativeLayout

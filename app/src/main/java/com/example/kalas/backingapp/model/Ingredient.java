@@ -5,10 +5,6 @@ import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 
-/**
- * Created by kalas on 4/1/2018.
- */
-
 public class Ingredient implements Parcelable {
 
     @SerializedName("quantity")
@@ -19,9 +15,6 @@ public class Ingredient implements Parcelable {
 
     @SerializedName("ingredient")
     private String ingredient;
-
-    public Ingredient() {
-    }
 
     public double getQuantity() {
         return quantity;
@@ -47,7 +40,7 @@ public class Ingredient implements Parcelable {
         dest.writeString(this.ingredient);
     }
 
-    protected Ingredient(Parcel in) {
+    private Ingredient(Parcel in) {
         this.quantity = in.readDouble();
         this.measure = in.readString();
         this.ingredient = in.readString();

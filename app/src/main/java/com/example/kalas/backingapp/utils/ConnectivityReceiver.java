@@ -1,5 +1,6 @@
 package com.example.kalas.backingapp.utils;
 
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -16,6 +17,7 @@ public class ConnectivityReceiver extends BroadcastReceiver {
         super();
     }
 
+    @SuppressLint("UnsafeProtectedBroadcastReceiver")
     @Override
     public void onReceive(Context context, Intent intent) {
         boolean isConnected = false;
@@ -29,13 +31,15 @@ public class ConnectivityReceiver extends BroadcastReceiver {
             connectivityReceiverListener.onNetworkConnectionChanged(isConnected);
         }
     }
+
     public static boolean isOnline() {
         try {
-            ConnectivityManager connectivityManager = (ConnectivityManager) MyApplication.getInstance().getApplicationContext()
-                    .getSystemService(Context.CONNECTIVITY_SERVICE);
-            assert connectivityManager != null;
-            NetworkInfo activeNetwork = connectivityManager.getActiveNetworkInfo();
-            return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
+            ConnectivityManager connectivityManager = (ConnectivityManager) MyApplication.getInstance().getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo networkInfo = null;
+            if (connectivityManager != null) {
+                networkInfo = connectivityManager.getActiveNetworkInfo();
+            }
+            return networkInfo != null && networkInfo.isConnectedOrConnecting();
         } catch (NullPointerException e) {
             e.printStackTrace();
             return false;
@@ -46,3 +50,4 @@ public class ConnectivityReceiver extends BroadcastReceiver {
         void onNetworkConnectionChanged(boolean isOnline);
     }
 }
+

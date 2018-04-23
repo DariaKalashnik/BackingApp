@@ -8,14 +8,14 @@
     tools:context="com.example.kalas.backingapp.activities.StepsListActivity">
 
     <fragment
-        android:id="@+id/recipe_list_ingredients"
+        android:id="@+id/list_of_steps"
         class="com.example.kalas.backingapp.fragments.StepsListFragment"
         android:layout_width="@dimen/left_pane_width"
         android:layout_height="wrap_content">
     </fragment>
 
     <FrameLayout
-        android:id="@+id/landscape_detils_fragment"
+        android:id="@+id/details_fragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </FrameLayout>

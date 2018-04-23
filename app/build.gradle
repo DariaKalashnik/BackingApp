@@ -30,17 +30,14 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 
-    // Butterknife
+    // ButterKnife
     compile 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 
-    // Retrofit, gson
+    // Retrofit, Gson
     compile 'com.google.code.gson:gson:2.8.2'
     compile 'com.squareup.retrofit2:retrofit:2.4.0'
     compile 'com.squareup.retrofit2:converter-gson:2.4.0'
-    compile 'com.squareup.okhttp3:logging-interceptor:3.8.0'
-
-    // HttpLogInterceptor
     compile 'com.squareup.okhttp3:logging-interceptor:3.8.0'
 
     // RecyclerView
@@ -67,4 +64,5 @@ dependencies {
 
     // SimpleExoPlayer
     compile 'com.google.android.exoplayer:exoplayer:2.6.1'
+    compile 'org.jetbrains:annotations-java5:15.0'
 }

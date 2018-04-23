@@ -5,7 +5,7 @@
     android:layout_height="match_parent">
 
     <fragment
-        android:id="@+id/recipe_list_ingredients"
+        android:id="@+id/list_of_steps"
         class="com.example.kalas.backingapp.fragments.StepsListFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent">

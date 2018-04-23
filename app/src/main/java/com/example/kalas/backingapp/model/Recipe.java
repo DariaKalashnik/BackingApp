@@ -1,6 +1,5 @@
 package com.example.kalas.backingapp.model;
 
-import android.databinding.Bindable;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -8,10 +7,6 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 import java.util.List;
-
-/**
- * Created by kalas on 4/1/2018.
- */
 
 public class Recipe implements Parcelable {
 
@@ -29,6 +24,7 @@ public class Recipe implements Parcelable {
     private List<Step> steps;
 
     public Recipe() {
+        // Empty public constructor
     }
 
     public int getId() {
@@ -51,32 +47,12 @@ public class Recipe implements Parcelable {
         return servings;
     }
 
-    public void setServings(int servings) {
-        this.servings = servings;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
     public List<Ingredient> getIngredients() {
         return ingredients;
     }
 
-    public void setIngredients(List<Ingredient> ingredients) {
-        this.ingredients = ingredients;
-    }
-
     public List<Step> getSteps() {
         return steps;
-    }
-
-    public void setSteps(List<Step> steps) {
-        this.steps = steps;
     }
 
 

@@ -2,29 +2,24 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container_for_step_list"
-    android:background="@color/colorBackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorBackground"
     android:orientation="vertical"
     tools:context="com.example.kalas.backingapp.activities.StepsListActivity">
 
     <FrameLayout
-        android:layout_weight="1"
-        android:id="@+id/landscape_detils_fragment"
+        android:id="@+id/details_fragment"
         android:layout_width="match_parent"
-        android:layout_height="0dp">
-
-        <android.support.v4.view.ViewPager
-            android:id="@+id/view_pager"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+        android:layout_height="0dp"
+        android:layout_weight="1">
     </FrameLayout>
 
-        <fragment
-            android:layout_weight="1"
-            android:id="@+id/recipe_list_ingredients"
-            class="com.example.kalas.backingapp.fragments.StepsListFragment"
-            android:layout_width="match_parent"
-            android:layout_height="0dp">
-        </fragment>
+    <fragment
+        android:id="@+id/list_of_steps"
+        class="com.example.kalas.backingapp.fragments.StepsListFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+    </fragment>
 </LinearLayout>

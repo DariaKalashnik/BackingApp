@@ -2,6 +2,7 @@ package com.example.kalas.backingapp.adapter;
 
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,27 +15,20 @@ import com.example.kalas.backingapp.model.Recipe;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by kalas on 4/1/2018.
- */
+public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.StepViewHolder> {
 
-public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.StepViewHolder> {
-
-    private List<Recipe> mModel;
+    private List<Recipe> mRecipeModel;
     private RecipeOnClickHandler mHandler;
     private ViewDataBinding mBinding;
-
 
     public interface RecipeOnClickHandler {
         void onClick(Recipe recipe);
     }
 
-
-    public RecipesAdapter(RecipeOnClickHandler onClickHandler) {
-        this.mModel = new ArrayList<>();
+    public RecipeAdapter(RecipeOnClickHandler onClickHandler) {
+        this.mRecipeModel = new ArrayList<>();
         mHandler = onClickHandler;
     }
-
 
     public class StepViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         StepViewHolder(ViewDataBinding binding) {
@@ -51,29 +45,29 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.StepView
 
         @Override
         public void onClick(View v) {
-            Recipe recipe = mModel.get(getAdapterPosition());
+            Recipe recipe = mRecipeModel.get(getAdapterPosition());
             mHandler.onClick(recipe);
         }
     }
 
+    @NonNull
     @Override
-    public StepViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        mBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.list_recipes, parent, false);
-        return new StepViewHolder(mBinding);
+    public StepViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new StepViewHolder(DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.list_recipes, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(StepViewHolder holder, int position) {
-        holder.bind(mModel.get(position));
+    public void onBindViewHolder(@NonNull StepViewHolder holder, int position) {
+        holder.bind(mRecipeModel.get(position));
     }
 
     public void addRecipe(List<Recipe> recipes){
-        mModel = recipes;
+        mRecipeModel = recipes;
         notifyDataSetChanged();
     }
 
     @Override
     public int getItemCount() {
-        return (mModel == null) ? 0 : mModel.size();
+        return (mRecipeModel == null) ? 0 : mRecipeModel.size();
     }
 }

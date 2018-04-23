@@ -1,6 +1,12 @@
 <resources>
     <string name="app_name">Recipe Book</string>
 
+    <!-- Error messages -->
+    <string name="fragment_listener_implementation_error">must implement OnFragmentInteractionListener</string>
+    <string name="failure_getting_response">Failure getting response from json!</string>
+    <string name="error_unsuccessful_response">Error occurred!</string>
+
+
     <!-- Content descriptions -->
     <string name="recipe_img_desc">image that represent recipe bool in the list of recipes</string>
     <string name="img_expand_more">arrow that expands expandable layout</string>

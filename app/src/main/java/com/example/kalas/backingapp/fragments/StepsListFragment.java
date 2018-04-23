@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.LayoutManager;
 import android.text.SpannableStringBuilder;
 import android.view.LayoutInflater;
@@ -28,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.kalas.backingapp.utils.BuildConfig.DASH;
-import static com.example.kalas.backingapp.utils.BuildConfig.RECIPE_KEY;
+import static com.example.kalas.backingapp.utils.BuildConfig.RECIPES_KEY;
 
 public class StepsListFragment extends Fragment implements StepOnClickHandler, View.OnClickListener {
 
@@ -36,30 +35,27 @@ public class StepsListFragment extends Fragment implements StepOnClickHandler, V
     private OnFragmentInteractionListener mListener;
     private StepAdapter mStepAdapter;
     private Recipe mRecipe;
-    ArrayList<Recipe> mRecipes;
+    private ArrayList<Recipe> mRecipes;
 
-    // Empty public constructor
     public StepsListFragment() {
+        // Empty public constructor
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getActivity().getIntent() != null) {
-            mRecipes = getActivity().getIntent().getParcelableArrayListExtra(RECIPE_KEY);
+            mRecipes = getActivity().getIntent().getParcelableArrayListExtra(RECIPES_KEY);
         }
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle
-            savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         // Inflate the layout for the fragment
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_list_steps, container, false);
 
-        for (int i = 0; i < mRecipes.size(); i++){
-            mRecipe = mRecipes.get(i);
-        }
+        mRecipe = Utils.setRecipe(mRecipes);
 
         // Display the Ingredients of the selected Recipe
         setIngredients();
@@ -82,7 +78,8 @@ public class StepsListFragment extends Fragment implements StepOnClickHandler, V
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {
-            throw new RuntimeException(context.toString() + " must implement OnFragmentInteractionListener");
+            throw new RuntimeException(context.toString()
+                    + getResources().getString(R.string.fragment_listener_implementation_error));
         }
     }
 
@@ -107,12 +104,11 @@ public class StepsListFragment extends Fragment implements StepOnClickHandler, V
         Utils.expendableLayoutSettings(id, mBinding);
     }
 
-
     private void setListOfSteps() {
         LayoutManager layoutManager = new LinearLayoutManager(this.getContext());
         mBinding.recyclerViewStep.setLayoutManager(layoutManager);
         List<Step> steps = mRecipe.getSteps();
-        mStepAdapter = new StepAdapter(StepsListFragment.this.getContext(), this);
+        mStepAdapter = new StepAdapter(this);
         mStepAdapter.addStep(steps);
     }
 
@@ -120,8 +116,7 @@ public class StepsListFragment extends Fragment implements StepOnClickHandler, V
         List<Ingredient> ingredients = mRecipe.getIngredients();
         SpannableStringBuilder builder = new SpannableStringBuilder();
         for (Ingredient ingredient : ingredients) {
-            builder
-                    .append(StringUtils.capitalize(ingredient.getIngredient())).append(DASH)
+            builder .append(StringUtils.capitalize(ingredient.getIngredient())).append(DASH)
                     .append(String.valueOf(ingredient.getQuantity())).append(StringUtils.SPACE)
                     .append(ingredient.getMeasure().toLowerCase()).append(StringUtils.LF);
         }

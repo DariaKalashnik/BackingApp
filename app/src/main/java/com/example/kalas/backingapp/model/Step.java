@@ -5,10 +5,6 @@ import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 
-/**
- * Created by kalas on 4/1/2018.
- */
-
 public class Step implements Parcelable{
 
     @SerializedName("id")
@@ -26,7 +22,9 @@ public class Step implements Parcelable{
     @SerializedName("thumbnailURL")
     private String thumbnailURL;
 
-    public Step(){}
+    public Step(){
+        // Empty public constructor
+    }
 
     public int getId() {
         return id;
@@ -40,34 +38,17 @@ public class Step implements Parcelable{
         return shortDescription;
     }
 
-    public void setShortDescription(String shortDescription) {
-        this.shortDescription = shortDescription;
-    }
-
     public String getDescription() {
         return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public String getVideoURL() {
         return videoURL;
     }
 
-    public void setVideoURL(String videoURL) {
-        this.videoURL = videoURL;
-    }
-
     public String getThumbnailURL() {
         return thumbnailURL;
     }
-
-    public void setThumbnailURL(String thumbnailURL) {
-        this.thumbnailURL = thumbnailURL;
-    }
-
 
     @Override
     public int describeContents() {
