@@ -26,11 +26,7 @@ public class DetailsActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Bundle bundle = new Bundle();
-        Intent intent = new Intent(this, StepsListActivity.class);
-//            bundle.putParcelableArrayList(RECIPES_KEY, recipes);
-//            intent.putExtras(bundle);
-        startActivity(intent);
+        startActivity(new Intent(this, StepsListActivity.class));
         this.finish();
     }
 }

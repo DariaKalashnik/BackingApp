@@ -10,6 +10,17 @@ import java.util.List;
 
 public class Recipe implements Parcelable {
 
+    public static final Creator<Recipe> CREATOR = new Creator<Recipe>() {
+        @Override
+        public Recipe createFromParcel(Parcel source) {
+            return new Recipe(source);
+        }
+
+        @Override
+        public Recipe[] newArray(int size) {
+            return new Recipe[size];
+        }
+    };
     @SerializedName("id")
     private int id;
     @SerializedName("name")
@@ -25,6 +36,17 @@ public class Recipe implements Parcelable {
 
     public Recipe() {
         // Empty public constructor
+    }
+
+    protected Recipe(Parcel in) {
+        this.id = in.readInt();
+        this.name = in.readString();
+        this.servings = in.readInt();
+        this.image = in.readString();
+        ingredients = new ArrayList<>();
+        in.readList(ingredients, Ingredient.class.getClassLoader());
+        steps = new ArrayList<>();
+        in.readList(steps, Ingredient.class.getClassLoader());
     }
 
     public int getId() {
@@ -55,7 +77,6 @@ public class Recipe implements Parcelable {
         return steps;
     }
 
-
     @Override
     public int describeContents() {
         return 0;
@@ -69,40 +90,5 @@ public class Recipe implements Parcelable {
         dest.writeString(this.image);
         dest.writeList(this.ingredients);
         dest.writeList(this.steps);
-    }
-
-    protected Recipe(Parcel in) {
-        this.id = in.readInt();
-        this.name = in.readString();
-        this.servings = in.readInt();
-        this.image = in.readString();
-        ingredients = new ArrayList<>();
-        in.readList(ingredients, Ingredient.class.getClassLoader());
-        steps = new ArrayList<>();
-        in.readList(steps, Ingredient.class.getClassLoader());
-    }
-
-    public static final Creator<Recipe> CREATOR = new Creator<Recipe>() {
-        @Override
-        public Recipe createFromParcel(Parcel source) {
-            return new Recipe(source);
-        }
-
-        @Override
-        public Recipe[] newArray(int size) {
-            return new Recipe[size];
-        }
-    };
-
-    @Override
-    public String toString() {
-        return "Recipe{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", servings=" + servings +
-                ", image='" + image + '\'' +
-                ", ingredients=" + ingredients +
-                ", steps=" + steps +
-                '}';
     }
 }

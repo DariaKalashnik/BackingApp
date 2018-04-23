@@ -7,23 +7,38 @@ import com.google.gson.annotations.SerializedName;
 
 public class Step implements Parcelable{
 
+    public static final Creator<Step> CREATOR = new Creator<Step>() {
+        @Override
+        public Step createFromParcel(Parcel source) {
+            return new Step(source);
+        }
+
+        @Override
+        public Step[] newArray(int size) {
+            return new Step[size];
+        }
+    };
     @SerializedName("id")
     private int id;
-
     @SerializedName("shortDescription")
     private String shortDescription;
-
     @SerializedName("description")
     private String description;
-
     @SerializedName("videoURL")
     private String videoURL;
-
     @SerializedName("thumbnailURL")
     private String thumbnailURL;
 
     public Step(){
         // Empty public constructor
+    }
+
+    protected Step(Parcel in) {
+        this.id = in.readInt();
+        this.shortDescription = in.readString();
+        this.description = in.readString();
+        this.videoURL = in.readString();
+        this.thumbnailURL = in.readString();
     }
 
     public int getId() {
@@ -62,36 +77,5 @@ public class Step implements Parcelable{
         dest.writeString(this.description);
         dest.writeString(this.videoURL);
         dest.writeString(this.thumbnailURL);
-    }
-
-    protected Step(Parcel in) {
-        this.id = in.readInt();
-        this.shortDescription = in.readString();
-        this.description = in.readString();
-        this.videoURL = in.readString();
-        this.thumbnailURL = in.readString();
-    }
-
-    public static final Creator<Step> CREATOR = new Creator<Step>() {
-        @Override
-        public Step createFromParcel(Parcel source) {
-            return new Step(source);
-        }
-
-        @Override
-        public Step[] newArray(int size) {
-            return new Step[size];
-        }
-    };
-
-    @Override
-    public String toString() {
-        return "Step{" +
-                "id=" + id +
-                ", shortDescription='" + shortDescription + '\'' +
-                ", description='" + description + '\'' +
-                ", videoURL='" + videoURL + '\'' +
-                ", thumbnailURL='" + thumbnailURL + '\'' +
-                '}';
     }
 }

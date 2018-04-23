@@ -1,0 +1,46 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="stepDetails"
+            type="com.example.kalas.backingapp.fragments.DetailsFragment" />
+
+        <variable
+            name="stepModel"
+            type="com.example.kalas.backingapp.model.Step" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/media_container"
+            style="@style/BaseRelativeLayoutStyle.MediaContainer"
+            android:layout_height="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_weight="1.5">
+
+            <ImageView
+                android:id="@+id/img_step_description"
+                style="@style/VideoStepDescriptionStyle.ImageDescription"
+                android:contentDescription="@string/img_step_description" />
+
+            <com.google.android.exoplayer2.ui.SimpleExoPlayerView
+                android:id="@+id/exoplayer"
+                style="@style/VideoStepDescriptionStyle" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/step_detailed_description"
+            style="@style/TextStepDescriptionStyle"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/value_16dp"
+            android:layout_weight="1"
+            android:text="@{stepModel.description}"
+            tools:text="@string/tools_recipe_step_description" />
+    </LinearLayout>
+</layout>

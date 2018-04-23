@@ -3,20 +3,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container_for_step_list"
     style="@style/BaseRelativeLayoutStyle"
-    android:orientation="horizontal"
     android:background="@color/colorBackground"
+    android:baselineAligned="false"
+    android:orientation="horizontal"
     tools:context="com.example.kalas.backingapp.activities.StepsListActivity">
 
     <fragment
         android:id="@+id/list_of_steps"
         class="com.example.kalas.backingapp.fragments.StepsListFragment"
-        android:layout_width="@dimen/left_pane_width"
-        android:layout_height="wrap_content">
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
     </fragment>
 
     <FrameLayout
         android:id="@+id/details_fragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.5">
     </FrameLayout>
 </LinearLayout>

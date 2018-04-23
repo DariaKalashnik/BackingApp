@@ -21,33 +21,9 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.StepViewHo
     private RecipeOnClickHandler mHandler;
     private ViewDataBinding mBinding;
 
-    public interface RecipeOnClickHandler {
-        void onClick(Recipe recipe);
-    }
-
     public RecipeAdapter(RecipeOnClickHandler onClickHandler) {
         this.mRecipeModel = new ArrayList<>();
-        mHandler = onClickHandler;
-    }
-
-    public class StepViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        StepViewHolder(ViewDataBinding binding) {
-            super(binding.getRoot());
-            mBinding = binding;
-            View view = binding.getRoot();
-            view.setOnClickListener(this);
-        }
-
-        private void bind(Object obj) {
-            mBinding.setVariable(BR.recipeModel, obj);
-            mBinding.executePendingBindings();
-        }
-
-        @Override
-        public void onClick(View v) {
-            Recipe recipe = mRecipeModel.get(getAdapterPosition());
-            mHandler.onClick(recipe);
-        }
+        this.mHandler = onClickHandler;
     }
 
     @NonNull
@@ -69,5 +45,29 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.StepViewHo
     @Override
     public int getItemCount() {
         return (mRecipeModel == null) ? 0 : mRecipeModel.size();
+    }
+
+    public interface RecipeOnClickHandler {
+        void onClick(Recipe recipe);
+    }
+
+    public class StepViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        StepViewHolder(ViewDataBinding binding) {
+            super(binding.getRoot());
+            mBinding = binding;
+            View view = binding.getRoot();
+            view.setOnClickListener(this);
+        }
+
+        private void bind(Object obj) {
+            mBinding.setVariable(BR.recipeModel, obj);
+            mBinding.executePendingBindings();
+        }
+
+        @Override
+        public void onClick(View v) {
+            Recipe recipe = mRecipeModel.get(getAdapterPosition());
+            mHandler.onClick(recipe);
+        }
     }
 }

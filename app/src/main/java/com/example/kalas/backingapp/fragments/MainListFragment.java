@@ -18,7 +18,6 @@ import com.example.kalas.backingapp.model.Recipe;
 import com.example.kalas.backingapp.utils.Utils;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindInt;
 import butterknife.ButterKnife;
@@ -29,12 +28,11 @@ import retrofit2.Response;
 
 public class MainListFragment extends Fragment implements RecipeAdapter.RecipeOnClickHandler {
 
+    @BindInt(R.integer.span_count)
+    int spanCount;
     private OnFragmentInteractionListener mListener;
     private RecipeAdapter mAdapter;
     private Unbinder mUnbinder;
-
-    @BindInt(R.integer.span_count)
-    int spanCount;
 
     public MainListFragment() {
         // Empty public constructor
@@ -59,8 +57,7 @@ public class MainListFragment extends Fragment implements RecipeAdapter.RecipeOn
             @Override
             public void onResponse(@NonNull Call<ArrayList<Recipe>> call, @NonNull Response<ArrayList<Recipe>> response) {
                 if (response.isSuccessful()) {
-                    List<Recipe> recipes = response.body();
-                    mAdapter.addRecipe(recipes);
+                    mAdapter.addRecipe(response.body());
                     mAdapter.notifyDataSetChanged();
                 } else {
                     Utils.showToast(getContext(), getResources().getString(R.string.error_unsuccessful_response));
@@ -98,13 +95,13 @@ public class MainListFragment extends Fragment implements RecipeAdapter.RecipeOn
         mListener.onFragmentInteraction(recipe);
     }
 
-    public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(Recipe recipe);
-    }
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         mUnbinder.unbind();
+    }
+
+    public interface OnFragmentInteractionListener {
+        void onFragmentInteraction(Recipe recipe);
     }
 }
