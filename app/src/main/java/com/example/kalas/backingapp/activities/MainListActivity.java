@@ -24,6 +24,7 @@ import static com.example.kalas.backingapp.utils.BuildConfig.RECIPES_KEY;
  * https://inducesmile.com/android/how-to-set-recycleview-item-row-background-color-in-android/
  * https://codelabs.developers.google.com/codelabs/exoplayer-intro/index.html?index=..%2F..%2Findex#2
  * https://commons.apache.org/proper/commons-lang/
+ * https://www.youtube.com/watch?time_continue=155&v=5BzYH6Vq6ZU
  */
 
 public class MainListActivity extends AppCompatActivity implements ConnectivityReceiverListener, OnFragmentInteractionListener {

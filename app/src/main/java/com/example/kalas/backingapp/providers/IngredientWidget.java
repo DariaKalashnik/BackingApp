@@ -1,4 +1,4 @@
-package com.example.kalas.backingapp.activities;
+package com.example.kalas.backingapp.providers;
 
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
@@ -17,7 +17,7 @@ public class IngredientWidget extends AppWidgetProvider {
 
         CharSequence widgetText = context.getString(R.string.appwidget_text);
         // Construct the RemoteViews object
-        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.activity_ingredient_widget);
+        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.ingredient_widget);
         views.setTextViewText(R.id.appwidget_text, widgetText);
 
         // Instruct the widget manager to update the widget

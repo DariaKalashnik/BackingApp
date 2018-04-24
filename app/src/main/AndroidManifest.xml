@@ -8,7 +8,6 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
-
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -46,7 +45,7 @@
                 android:value="com.example.kalas.backingapp.activities.MainListActivity" />
         </activity>
 
-        <receiver android:name=".activities.IngredientWidget">
+        <receiver android:name=".providers.IngredientWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -55,6 +54,8 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/ingredient_widget_info" />
         </receiver>
+
+        <activity android:name=".activities.IngredientWidgetActivityConfig"></activity>
     </application>
 
 </manifest>
