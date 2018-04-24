@@ -21,6 +21,7 @@ import static com.example.kalas.backingapp.utils.BuildConfig.RECIPES_KEY;
  *
  * Used resources:
  * https://chantisandroid.blogspot.hu/2017/03/check-internet-connection-using.html
+ * https://www.androidhive.info/2012/07/android-detect-internet-connection-status/
  * https://inducesmile.com/android/how-to-set-recycleview-item-row-background-color-in-android/
  * https://codelabs.developers.google.com/codelabs/exoplayer-intro/index.html?index=..%2F..%2Findex#2
  * https://commons.apache.org/proper/commons-lang/

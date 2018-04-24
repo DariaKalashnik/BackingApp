@@ -28,6 +28,7 @@ import retrofit2.Response;
 
 public class MainListFragment extends Fragment implements RecipeAdapter.RecipeOnClickHandler {
 
+    public static ArrayList<Recipe> sRecipesList;
     @BindInt(R.integer.span_count)
     int spanCount;
     private OnFragmentInteractionListener mListener;
@@ -57,7 +58,8 @@ public class MainListFragment extends Fragment implements RecipeAdapter.RecipeOn
             @Override
             public void onResponse(@NonNull Call<ArrayList<Recipe>> call, @NonNull Response<ArrayList<Recipe>> response) {
                 if (response.isSuccessful()) {
-                    mAdapter.addRecipe(response.body());
+                    sRecipesList = response.body();
+                    mAdapter.addRecipe(sRecipesList);
                     mAdapter.notifyDataSetChanged();
                 } else {
                     Utils.showToast(getContext(), getResources().getString(R.string.error_unsuccessful_response));

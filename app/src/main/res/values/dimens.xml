@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- dp values -->
-    <dimen name="value_0dp">0dp</dimen>
     <dimen name="value_1dp">1dp</dimen>
     <dimen name="value_2dp">2dp</dimen>
     <dimen name="value_3dp">3dp</dimen>
