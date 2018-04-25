@@ -11,7 +11,7 @@ import android.widget.RemoteViews;
 import com.example.kalas.backingapp.R;
 import com.example.kalas.backingapp.activities.MainListActivity;
 
-import static com.example.kalas.backingapp.activities.IngredientWidgetActivityConfig.KEY_BUTTON_TEXT;
+import static com.example.kalas.backingapp.activities.IngredientWidgetActivityConfig.KEY_INGREDIENT_TEXT;
 import static com.example.kalas.backingapp.activities.IngredientWidgetActivityConfig.SHARED_PREFS;
 
 /**
@@ -19,21 +19,47 @@ import static com.example.kalas.backingapp.activities.IngredientWidgetActivityCo
  */
 public class IngredientWidget extends AppWidgetProvider {
 
+    private void updateIngredientWidgets(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
+
+        Intent intent = new Intent(context, MainListActivity.class);
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
+
+        SharedPreferences prefs = context.getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+
+        String ingredientText = prefs.getString(KEY_INGREDIENT_TEXT + appWidgetId, "fefe");
+
+        RemoteViews views = new RemoteViews(context.getPackageName
+                (), R.layout.ingredient_widget);
+
+        views.setTextViewText(R.id.widget_ingredient_text, ingredientText);
+
+        views.setOnClickPendingIntent(R.id.widget_ingredient_text, pendingIntent);
+
+        appWidgetManager.updateAppWidget(appWidgetId, views);
+
+    }
+
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         for (int appWidgetId : appWidgetIds) {
-            Intent intent = new Intent(context, MainListActivity.class);
-            PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
-
-            SharedPreferences prefs = context.getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
-            String buttonText = prefs.getString(KEY_BUTTON_TEXT + appWidgetId, "Press me");
-
-            RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.ingredient_widget);
-            views.setOnClickPendingIntent(R.id.example_widget_button, pendingIntent);
-            views.setCharSequence(R.id.example_widget_button, "setText", buttonText);
-
-            appWidgetManager.updateAppWidget(appWidgetId, views);
+            updateIngredientWidgets(context, appWidgetManager, appWidgetId);
         }
+    }
+
+    @Override
+    public void onDeleted(Context context, int[] appWidgetIds) {
+        // Action performed when one or more AppWidget instances have been deleted
+    }
+
+    @Override
+    public void onEnabled(Context context) {
+        // Action performed action when an AppWidget for this provider is instantiated
+    }
+
+    @Override
+    public void onDisabled(Context context) {
+        // Action performed when the last AppWidget instance for this provider is deleted
     }
 }
 

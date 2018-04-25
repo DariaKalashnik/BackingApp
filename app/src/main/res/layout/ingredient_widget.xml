@@ -1,19 +1,27 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryLight">
 
     <TextView
         android:id="@+id/widget_ingredient_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true" />
+        style="@style/IngredientsTextStyle"
+        android:textColor="@color/colorSecondaryText"
+        android:textSize="@dimen/value_16sp"
+        tools:text="@string/tools_recipe_ingredient" />
 
     <Button
         android:id="@+id/example_widget_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/widget_ingredient_text"
+        android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
-        android:text="Press me" />
+        android:layout_margin="@dimen/value_16dp"
+        android:background="@drawable/button_border"
+        android:padding="@dimen/value_10dp"
+        android:text="Check More Recipes"
+        android:textAllCaps="false"
+        android:textColor="@color/colorPrimaryLight" />
 
 </RelativeLayout>

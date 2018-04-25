@@ -26,9 +26,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.example.kalas.backingapp.activities.MainListActivity.sRecipesList;
+
 public class MainListFragment extends Fragment implements RecipeAdapter.RecipeOnClickHandler {
 
-    public static ArrayList<Recipe> sRecipesList;
     @BindInt(R.integer.span_count)
     int spanCount;
     private OnFragmentInteractionListener mListener;
@@ -69,7 +70,7 @@ public class MainListFragment extends Fragment implements RecipeAdapter.RecipeOn
             @Override
             public void onFailure(@NonNull Call<ArrayList<Recipe>> call, @NonNull Throwable throwable) {
                 // Display Toast message if request is failed
-                Utils.showToast(getContext(),  getResources().getString(R.string.failure_getting_response));
+                Utils.showToast(getContext(), getResources().getString(R.string.failure_getting_response));
             }
         });
 

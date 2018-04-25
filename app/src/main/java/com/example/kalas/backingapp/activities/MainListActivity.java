@@ -13,6 +13,7 @@ import com.example.kalas.backingapp.utils.ConnectivityReceiver;
 import com.example.kalas.backingapp.utils.ConnectivityReceiver.ConnectivityReceiverListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static com.example.kalas.backingapp.utils.BuildConfig.RECIPES_KEY;
 
@@ -30,6 +31,7 @@ import static com.example.kalas.backingapp.utils.BuildConfig.RECIPES_KEY;
 
 public class MainListActivity extends AppCompatActivity implements ConnectivityReceiverListener, OnFragmentInteractionListener {
 
+    public static List<Recipe> sRecipesList;
     private boolean mIsConnected;
 
     @Override
