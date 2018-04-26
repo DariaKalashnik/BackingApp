@@ -2,15 +2,16 @@
     <string name="app_name">Recipe Book</string>
 
     <!-- Toast messages -->
-    <string name="toast_recipes_list_msg">"<b>"Enter one of the next recipes:"</b>" \n Nutella Pie \n Yellow Cake \n Brownies \n Cheesecake</string>
+    <string name="toast_recipes_list_msg">"<b>"Enter one of the next recipes:"</b>" \n <i>Nutella Pie</i> \n <i>Yellow Cake</i> \n <i>Brownies</i> \n <i>Cheesecake</i></string>
 
     <!-- Error messages -->
-    <string name="fragment_listener_implementation_error">must implement OnFragmentInteractionListener</string>
-    <string name="failure_getting_response">Failure getting response from json!</string>
+    <string name="error_fragment_listener_implementation_required">must implement OnFragmentInteractionListener</string>
+    <string name="error_failure_getting_response">Failure getting response from json!</string>
     <string name="error_unsuccessful_response">Error occurred!</string>
+    <string name="error_recipes_list_is_empty">Error occurred, Recipes\' list is empty</string>
 
     <!-- Content descriptions -->
-    <string name="recipe_img_desc">image that represent recipe bool in the list of recipes</string>
+    <string name="img_recipe_desc">image that represent recipe bool in the list of recipes</string>
     <string name="img_expand_more">arrow that expands expandable layout</string>
     <string name="img_expand_less">arrow that collapses expandable layout</string>
     <string name="img_step_description">image that shows step description</string>
@@ -22,9 +23,15 @@
     <string name="tools_recipe_step_description">1. Preheat the oven to 350\u00b0F. Butter a 9\" deep dish pie pan.</string>
     <string name="tools_recipe_ingredient">Graham Cracker crumbs - 2 cup</string>
 
+    <!-- Buttons labels -->
+    <string name="btn_submit">Show Ingredients</string>
+    <string name="btn_open_main_activity">Check More Recipes</string>
+
     <!-- String values -->
     <string name="text_recipe_servings">Servings: %s</string>
     <string name="expandable_layout_title">Ingredients details</string>
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
+    <string name="default_widget_text">Click on button below to check Recipes\' Book</string>
+    <string name="edit_text_hint">Enter Recipe Name…</string>
 </resources>

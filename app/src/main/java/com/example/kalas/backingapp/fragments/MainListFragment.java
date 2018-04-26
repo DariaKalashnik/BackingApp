@@ -70,7 +70,7 @@ public class MainListFragment extends Fragment implements RecipeAdapter.RecipeOn
             @Override
             public void onFailure(@NonNull Call<ArrayList<Recipe>> call, @NonNull Throwable throwable) {
                 // Display Toast message if request is failed
-                Utils.showToast(getContext(), getResources().getString(R.string.failure_getting_response));
+                Utils.showToast(getContext(), getResources().getString(R.string.error_failure_getting_response));
             }
         });
 
@@ -83,7 +83,7 @@ public class MainListFragment extends Fragment implements RecipeAdapter.RecipeOn
             mListener = (OnFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + getResources().getString(R.string.fragment_listener_implementation_error));
+                    + getResources().getString(R.string.error_fragment_listener_implementation_required));
         }
     }
 

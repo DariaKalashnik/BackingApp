@@ -1,9 +1,13 @@
 package com.example.kalas.backingapp.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.kalas.backingapp.R;
@@ -26,6 +30,21 @@ public class Utils {
      */
     public static void showToast(Context context, String message) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * Method to show the Custom Toast messages
+     *
+     * @param context  current context
+     * @param activity current activity
+     */
+    public static void showCustomToast(Context context, Activity activity) {
+        Toast toast = new Toast(context);
+        LayoutInflater inflater = LayoutInflater.from(context);
+        toast.setView(inflater.inflate(R.layout.toast_message, (ViewGroup) activity.findViewById(R.id.toast_msg_container)));
+        toast.setGravity(Gravity.BOTTOM, 0, 50);
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.show();
     }
 
     /**

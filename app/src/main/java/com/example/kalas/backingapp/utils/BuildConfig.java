@@ -13,4 +13,10 @@ public class BuildConfig {
 
     // Dash symbol with spaces, used to display list of Ingredients
     public static final String DASH = " - ";
+
+    // Key for SharedPreferences that stores ingredient info in the widget
+    public static final String SHARED_PREFS = "SHARED PREFERENCES";
+
+    // Key to store ingredient info in the widget
+    public static final String KEY_INGREDIENT_TEXT = "INGREDIENTS DATA";
 }

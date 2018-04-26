@@ -28,7 +28,7 @@
             <ImageView
                 android:id="@+id/img_view_details"
                 style="@style/IconStepsListStyle"
-                android:contentDescription="@string/recipe_img_desc" />
+                android:contentDescription="@string/img_recipe_desc" />
         </RelativeLayout>
     </android.support.v7.widget.CardView>
 </layout>

@@ -11,13 +11,10 @@ import android.widget.RemoteViews;
 import com.example.kalas.backingapp.R;
 import com.example.kalas.backingapp.activities.MainListActivity;
 
-import static com.example.kalas.backingapp.activities.IngredientWidgetActivityConfig.KEY_INGREDIENT_TEXT;
-import static com.example.kalas.backingapp.activities.IngredientWidgetActivityConfig.SHARED_PREFS;
+import static com.example.kalas.backingapp.utils.BuildConfig.KEY_INGREDIENT_TEXT;
+import static com.example.kalas.backingapp.utils.BuildConfig.SHARED_PREFS;
 
-/**
- * Implementation of App Widget functionality.
- */
-public class IngredientWidget extends AppWidgetProvider {
+public class IngredientWidgetProvider extends AppWidgetProvider {
 
     private void updateIngredientWidgets(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
 
@@ -27,14 +24,13 @@ public class IngredientWidget extends AppWidgetProvider {
 
         SharedPreferences prefs = context.getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
 
-        String ingredientText = prefs.getString(KEY_INGREDIENT_TEXT + appWidgetId, "fefe");
+        String ingredientText = prefs.getString(KEY_INGREDIENT_TEXT + appWidgetId, context.getString(R.string.default_widget_text));
 
-        RemoteViews views = new RemoteViews(context.getPackageName
-                (), R.layout.ingredient_widget);
+        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.ingredient_widget);
 
         views.setTextViewText(R.id.widget_ingredient_text, ingredientText);
 
-        views.setOnClickPendingIntent(R.id.widget_ingredient_text, pendingIntent);
+        views.setOnClickPendingIntent(R.id.example_widget_button, pendingIntent);
 
         appWidgetManager.updateAppWidget(appWidgetId, views);
 

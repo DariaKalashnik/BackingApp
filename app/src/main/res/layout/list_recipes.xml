@@ -22,7 +22,7 @@
             <ImageView
                 android:id="@+id/img_recipe_book"
                 style="@style/RecipeImgStyle"
-                android:contentDescription="@string/recipe_img_desc" />
+                android:contentDescription="@string/img_recipe_desc" />
 
             <TextView
                 android:id="@+id/recipe_name"
@@ -32,8 +32,8 @@
 
             <TextView
                 android:id="@+id/recipe_servings"
-                android:text="@{@string/text_recipe_servings(recipeModel.servings)}"
                 style="@style/RecipeTitleStyle.Servings"
+                android:text="@{@string/text_recipe_servings(recipeModel.servings)}"
                 tool:text="@string/tools_recipe_servings" />
         </RelativeLayout>
     </android.support.v7.widget.CardView>

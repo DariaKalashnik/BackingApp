@@ -79,7 +79,7 @@ public class StepsListFragment extends Fragment implements StepOnClickHandler, V
             mListener = (OnFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + getResources().getString(R.string.fragment_listener_implementation_error));
+                    + getResources().getString(R.string.error_fragment_listener_implementation_required));
         }
     }
 

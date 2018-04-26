@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/toast_msg_container"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    style="@style/BaseRelativeLayoutStyle"
+    android:background="@drawable/toast_message_design">
 
     <TextView
         android:id="@+id/error_toast_message"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:padding="@dimen/value_10dp"
-        android:text="@string/toast_recipes_list_msg"
-        android:textColor="@android:color/white" />
+        style="@style/CustomToastStyle" />
 </RelativeLayout>
