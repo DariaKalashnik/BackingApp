@@ -16,17 +16,13 @@ import com.example.kalas.backingapp.R;
 import com.example.kalas.backingapp.adapter.StepAdapter;
 import com.example.kalas.backingapp.adapter.StepAdapter.StepOnClickHandler;
 import com.example.kalas.backingapp.databinding.FragmentListStepsBinding;
-import com.example.kalas.backingapp.model.Ingredient;
 import com.example.kalas.backingapp.model.Recipe;
 import com.example.kalas.backingapp.model.Step;
 import com.example.kalas.backingapp.utils.Utils;
 
-import org.apache.commons.lang3.StringUtils;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.kalas.backingapp.utils.BuildConfig.DASH;
 import static com.example.kalas.backingapp.utils.BuildConfig.RECIPES_KEY;
 
 public class StepsListFragment extends Fragment implements StepOnClickHandler, View.OnClickListener {
@@ -113,14 +109,8 @@ public class StepsListFragment extends Fragment implements StepOnClickHandler, V
     }
 
     private void setIngredients() {
-        List<Ingredient> ingredients = mRecipe.getIngredients();
         SpannableStringBuilder builder = new SpannableStringBuilder();
-        for (Ingredient ingredient : ingredients) {
-            builder .append(StringUtils.capitalize(ingredient.getIngredient())).append(DASH)
-                    .append(String.valueOf(ingredient.getQuantity())).append(StringUtils.SPACE)
-                    .append(ingredient.getMeasure().toLowerCase()).append(StringUtils.LF);
-        }
-
+        Utils.displayIngredientData(mRecipe, builder);
         mBinding.recipeIngredientsContent.setText(builder.toString());
     }
 

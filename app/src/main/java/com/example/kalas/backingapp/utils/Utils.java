@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.SpannableStringBuilder;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,9 +18,15 @@ import com.example.kalas.backingapp.databinding.FragmentListMainBinding;
 import com.example.kalas.backingapp.databinding.FragmentListStepsBinding;
 import com.example.kalas.backingapp.fragments.MainListFragment;
 import com.example.kalas.backingapp.fragments.StepsListFragment;
+import com.example.kalas.backingapp.model.Ingredient;
 import com.example.kalas.backingapp.model.Recipe;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.ArrayList;
+import java.util.List;
+
+import static com.example.kalas.backingapp.utils.BuildConfig.DASH;
 
 public class Utils {
 
@@ -106,5 +113,16 @@ public class Utils {
             recipe = recipes.get(i);
         }
         return recipe;
+    }
+
+    public static void displayIngredientData(Recipe recipe, SpannableStringBuilder builder) {
+        List<Ingredient> ingredients = recipe.getIngredients();
+        for (Ingredient ingredient : ingredients) {
+
+            builder.append(StringUtils.capitalize(ingredient.getIngredient())).append(DASH)
+                    .append(String.valueOf(ingredient.getQuantity())).append(StringUtils.SPACE)
+                    .append(ingredient.getMeasure().toLowerCase())
+                    .append(StringUtils.LF);
+        }
     }
 }

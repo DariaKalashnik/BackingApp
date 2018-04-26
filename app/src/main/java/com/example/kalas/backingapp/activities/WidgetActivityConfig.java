@@ -12,7 +12,6 @@ import android.widget.EditText;
 import android.widget.RemoteViews;
 
 import com.example.kalas.backingapp.R;
-import com.example.kalas.backingapp.model.Ingredient;
 import com.example.kalas.backingapp.model.Recipe;
 import com.example.kalas.backingapp.utils.Utils;
 
@@ -20,7 +19,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 
-import static com.example.kalas.backingapp.utils.BuildConfig.DASH;
 import static com.example.kalas.backingapp.utils.BuildConfig.KEY_INGREDIENT_TEXT;
 import static com.example.kalas.backingapp.utils.BuildConfig.SHARED_PREFS;
 
@@ -97,19 +95,12 @@ public class WidgetActivityConfig extends AppCompatActivity {
     }
 
     private void printIngredients(String recipeName) {
-        List<Ingredient> ingredients = mRecipe.getIngredients();
-        SpannableStringBuilder builder = new SpannableStringBuilder();
-        for (Ingredient ingredient : ingredients) {
 
-            builder.append(StringUtils.capitalize(ingredient.getIngredient())).append(DASH)
-                    .append(String.valueOf(ingredient.getQuantity())).append(StringUtils.SPACE)
-                    .append(ingredient.getMeasure().toLowerCase())
-                    .append(StringUtils.LF);
-        }
+        SpannableStringBuilder builder = new SpannableStringBuilder();
+        Utils.displayIngredientData(mRecipe, builder);
 
         String ingredientText = recipeName.concat(StringUtils.LF).concat(builder.toString());
         mRemoteViews.setTextViewText(R.id.widget_ingredient_text, ingredientText);
-
 
         mAppWidgetManager.updateAppWidget(appWidgetId, mRemoteViews);
 
