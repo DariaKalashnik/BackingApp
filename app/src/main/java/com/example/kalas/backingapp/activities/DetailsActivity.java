@@ -1,6 +1,5 @@
 package com.example.kalas.backingapp.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
@@ -22,11 +21,5 @@ public class DetailsActivity extends AppCompatActivity {
         ArrayList<Recipe> recipes = getIntent().getParcelableArrayListExtra(RECIPES_KEY);
         Recipe recipe = Utils.setRecipe(recipes);
         setTitle(recipe.getName());
-    }
-
-    @Override
-    public void onBackPressed() {
-        startActivity(new Intent(this, StepsListActivity.class));
-        this.finish();
     }
 }
