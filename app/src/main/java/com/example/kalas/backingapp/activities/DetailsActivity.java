@@ -22,4 +22,10 @@ public class DetailsActivity extends AppCompatActivity {
         Recipe recipe = Utils.setRecipe(recipes);
         setTitle(recipe.getName());
     }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
 }

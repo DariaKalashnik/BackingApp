@@ -38,11 +38,16 @@ public class StepsListFragment extends Fragment implements StepOnClickHandler, V
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         if (getActivity().getIntent() != null) {
             mRecipes = getActivity().getIntent().getParcelableArrayListExtra(RECIPES_KEY);
         }
+    }
+
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         // Inflate the layout for the fragment
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_list_steps, container, false);
 

@@ -28,6 +28,8 @@ import static com.example.kalas.backingapp.utils.BuildConfig.RECIPES_KEY;
  * https://commons.apache.org/proper/commons-lang/
  * https://www.youtube.com/watch?time_continue=155&v=5BzYH6Vq6ZU
  * http://alexander-thiele.blogspot.hu/2016/01/espresso-ui-tests-and-recyclerview.html
+ * https://github.com/shohrabuddin/Espresso
+ * http://www.vogella.com/tutorials/AndroidTestingEspresso/article.html
  */
 
 public class MainListActivity extends AppCompatActivity implements ConnectivityReceiverListener, OnFragmentInteractionListener {
