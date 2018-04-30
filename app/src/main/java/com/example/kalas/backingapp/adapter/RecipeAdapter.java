@@ -52,6 +52,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.StepViewHo
     }
 
     public class StepViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
         StepViewHolder(ViewDataBinding binding) {
             super(binding.getRoot());
             mBinding = binding;

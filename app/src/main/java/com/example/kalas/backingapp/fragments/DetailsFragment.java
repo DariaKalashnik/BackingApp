@@ -17,6 +17,7 @@ import com.example.kalas.backingapp.databinding.FragmentDetailsBinding;
 import com.example.kalas.backingapp.model.Recipe;
 import com.example.kalas.backingapp.model.Step;
 import com.example.kalas.backingapp.utils.Utils;
+import com.google.android.exoplayer2.C;
 import com.google.android.exoplayer2.ExoPlaybackException;
 import com.google.android.exoplayer2.ExoPlayerFactory;
 import com.google.android.exoplayer2.PlaybackParameters;
@@ -40,6 +41,8 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 import static com.example.kalas.backingapp.activities.StepsListActivity.sTabLayout;
+import static com.example.kalas.backingapp.utils.BuildConfig.CURRENT_PLAYER_POSITION;
+import static com.example.kalas.backingapp.utils.BuildConfig.CURRENT_PLAYER_STATE;
 import static com.example.kalas.backingapp.utils.BuildConfig.RECIPES_KEY;
 import static com.example.kalas.backingapp.utils.BuildConfig.SELECTED_STEP_KEY;
 
@@ -56,6 +59,7 @@ public class DetailsFragment extends Fragment implements Player.EventListener {
     private PlaybackStateCompat.Builder mStateBuilder;
     private Step mStep;
     private long mPlayerPosition = 0;
+    private boolean mPlayWhenReady;
 
     public DetailsFragment() {
         // Empty public constructor
@@ -76,6 +80,11 @@ public class DetailsFragment extends Fragment implements Player.EventListener {
         if (getArguments() != null) {
             mRecipes = getArguments().getParcelableArrayList(RECIPES_KEY);
             mSelectedStepId = getArguments().getInt(SELECTED_STEP_KEY);
+        }
+
+        if (savedInstanceState != null) {
+            mPlayerPosition = savedInstanceState.getLong(CURRENT_PLAYER_POSITION, C.TIME_UNSET);
+            mPlayWhenReady = savedInstanceState.getBoolean(CURRENT_PLAYER_STATE);
         }
     }
 
@@ -113,7 +122,9 @@ public class DetailsFragment extends Fragment implements Player.EventListener {
             DataSource.Factory dataSourceFactory = new DefaultDataSourceFactory(this.getContext(), userAgent);
             MediaSource mediaSource = new ExtractorMediaSource.Factory(dataSourceFactory).createMediaSource(Uri.parse(mStep.getVideoURL()));
             mExoPlayer.prepare(mediaSource);
-            mExoPlayer.setPlayWhenReady(true);
+
+            mExoPlayer.setPlayWhenReady(mPlayWhenReady);
+
             mExoPlayer.seekTo(mPlayerPosition);
         }
     }
@@ -208,15 +219,11 @@ public class DetailsFragment extends Fragment implements Player.EventListener {
     @Override
     public void onPause() {
         super.onPause();
-        if (Util.SDK_INT <= 23) {
-            releasePlayer();
+        if (mExoPlayer != null) {
+            mPlayerPosition = mExoPlayer.getCurrentPosition();
+            mPlayWhenReady = mExoPlayer.getPlayWhenReady();
         }
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        if (Util.SDK_INT > 23) {
+        if (Util.SDK_INT <= 23) {
             releasePlayer();
         }
     }
@@ -270,6 +277,12 @@ public class DetailsFragment extends Fragment implements Player.EventListener {
 
     }
 
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putLong(CURRENT_PLAYER_POSITION, mPlayerPosition);
+        outState.putBoolean(CURRENT_PLAYER_STATE, mPlayWhenReady);
+    }
 
     /**
      * Media Session Callbacks, where all external clients control the player.

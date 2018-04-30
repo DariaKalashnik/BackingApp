@@ -22,17 +22,19 @@
             <ImageView
                 android:id="@+id/img_recipe_book"
                 style="@style/RecipeImgStyle"
-                android:contentDescription="@string/img_recipe_desc" />
+                android:contentDescription="@string/img_recipe_desc"
+                app:imageUrl="@{recipeModel.image}"
+                tool:src="@drawable/recipe_book" />
 
             <TextView
                 android:id="@+id/recipe_name"
-                style="@style/RecipeTitleStyle"
+                style="@style/RecipeServingsStyle.Title"
                 android:text="@{recipeModel.name}"
                 tool:text="@string/tools_dish_name" />
 
             <TextView
                 android:id="@+id/recipe_servings"
-                style="@style/RecipeTitleStyle.Servings"
+                style="@style/RecipeServingsStyle"
                 android:text="@{@string/text_recipe_servings(recipeModel.servings)}"
                 tool:text="@string/tools_recipe_servings" />
         </RelativeLayout>

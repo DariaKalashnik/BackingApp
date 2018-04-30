@@ -1,9 +1,13 @@
 package com.example.kalas.backingapp.model;
 
+import android.databinding.BindingAdapter;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.widget.ImageView;
 
+import com.example.kalas.backingapp.R;
 import com.google.gson.annotations.SerializedName;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +25,7 @@ public class Recipe implements Parcelable {
             return new Recipe[size];
         }
     };
+
     @SerializedName("id")
     private int id;
     @SerializedName("name")
@@ -49,6 +54,19 @@ public class Recipe implements Parcelable {
         in.readList(steps, Ingredient.class.getClassLoader());
     }
 
+    @BindingAdapter({"bind:imageUrl"})
+    public static void loadImage(ImageView imageView, String imageUrl) {
+        if (!imageUrl.equals("")) {
+            Picasso.with(imageView.getContext())
+                    .load(imageUrl)
+                    .placeholder(R.drawable.recipe_book)
+                    .error(R.drawable.recipe_book)
+                    .into(imageView);
+        } else {
+            imageView.setImageDrawable(imageView.getContext().getResources().getDrawable(R.drawable.recipe_book));
+        }
+    }
+
     public int getId() {
         return id;
     }
@@ -75,6 +93,10 @@ public class Recipe implements Parcelable {
 
     public List<Step> getSteps() {
         return steps;
+    }
+
+    public String getImage() {
+        return image;
     }
 
     @Override
