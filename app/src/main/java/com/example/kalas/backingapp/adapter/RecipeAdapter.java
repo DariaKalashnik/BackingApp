@@ -15,7 +15,7 @@ import com.example.kalas.backingapp.model.Recipe;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.StepViewHolder> {
+public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder> {
 
     private List<Recipe> mRecipeModel;
     private RecipeOnClickHandler mHandler;
@@ -28,12 +28,12 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.StepViewHo
 
     @NonNull
     @Override
-    public StepViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new StepViewHolder(DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.list_recipes, parent, false));
+    public RecipeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new RecipeViewHolder(DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.list_recipes, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull StepViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecipeViewHolder holder, int position) {
         holder.bind(mRecipeModel.get(position));
     }
 
@@ -51,9 +51,9 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.StepViewHo
         void onClick(Recipe recipe);
     }
 
-    public class StepViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class RecipeViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        StepViewHolder(ViewDataBinding binding) {
+        RecipeViewHolder(ViewDataBinding binding) {
             super(binding.getRoot());
             mBinding = binding;
             View view = binding.getRoot();

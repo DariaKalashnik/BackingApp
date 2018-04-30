@@ -27,6 +27,7 @@ import static com.example.kalas.backingapp.utils.BuildConfig.RECIPES_KEY;
  * https://codelabs.developers.google.com/codelabs/exoplayer-intro/index.html?index=..%2F..%2Findex#2
  * https://commons.apache.org/proper/commons-lang/
  * https://www.youtube.com/watch?time_continue=155&v=5BzYH6Vq6ZU
+ * http://alexander-thiele.blogspot.hu/2016/01/espresso-ui-tests-and-recyclerview.html
  */
 
 public class MainListActivity extends AppCompatActivity implements ConnectivityReceiverListener, OnFragmentInteractionListener {
